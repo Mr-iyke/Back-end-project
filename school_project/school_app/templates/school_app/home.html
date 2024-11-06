@@ -1,0 +1,86 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% block title %}Home{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/homepg.css' %}" />
+{% endblock %} 
+{% block content %}
+<section class="hero">
+  <div class="shadow"></div>
+  <div class="shape">
+    <div class="content-area">
+      <h1>
+        welcome to borcelle<br />
+        class academy <br />student job <br />
+        application platform
+      </h1>
+      <div class="cta">
+        {% if request.user.is_authenticated %}
+        <a class="link" href="{% url 'OffCampuspage' %}"> Find a Job </a>
+        {% else %}
+        <a class="link" href="{% url 'Registerpage' %}"> Register </a>
+        <a class="link" href="{% url 'Loginpage' %}"> login </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  <div class="hero-img">
+    <img src="{% static 'img/heroimg.png' %}" alt="img" />
+  </div>
+</section>
+<section class="sec2">
+  <h2>Find a Job</h2>
+  <ul class="grid">
+    {% for app in all %}
+      <li class="list">
+        <div class="image-container">
+          <img 
+            width="200" 
+            src="{{ app.image.url }}" 
+            alt="Image"
+            />
+        </div>
+        <div class="content-box">
+          <div>
+            <div class="title">
+              {{ app.title }}
+            </div>
+            <div class="date">
+              Uploaded on {{ app.uploaded_at }}
+            </div>
+            <a class="apply" href="{% url 'Detailspage' app.id %}">View Details</a>
+          </div> 
+        </div>
+      </li>
+    {% endfor %} 
+  </ul>
+  <span><a class="link page-link" href="{% url 'OffCampuspage' %}">See More</a></span>
+</section>
+<section class="sec3">
+  <h2>Recently Uploaded</h2>
+  <ul class="grid">
+    {% for app in recent %}
+      <li class="list">
+        <div class="image-container">
+          <img 
+            width="200" 
+            src="{{ app.image.url }}" 
+            alt="Image"
+            />
+        </div>
+        <div class="content-box">
+          <div>
+            <div class="title">
+              {{ app.title }}
+            </div>
+            <div class="date">
+              Uploaded on {{ app.uploaded_at }}
+            </div>
+            <a class="apply" href="{% url 'Detailspage' app.id %}">View Details</a>
+          </div> 
+        </div>
+      </li>
+    {% endfor %} 
+  </ul>
+</section>
+{% endblock %}

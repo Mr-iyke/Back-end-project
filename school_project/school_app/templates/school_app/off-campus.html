@@ -1,0 +1,56 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% block title %}Off-Campus{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/homepg.css' %}" />
+<link rel="stylesheet" href="{% static 'css/offcampus.css' %}" />
+{% endblock %} 
+{% block content %}
+<section class="hero">
+  <div class="shadow"></div>
+  <div class="shape">
+    <div class="content-area">
+      <h1>
+        Find A Job
+      </h1>
+      <div class="cta">
+        <form  action="{% url 'Searchpage' %}" method="get", role="search">
+          <input
+            type="search"
+            name="query"
+            placeholder="search..."
+          />
+          <button type="submit">search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="sec2">
+  <h2>All Jobs</h2>
+  <ul class="grid">
+    {% for app in all %}
+      <li class="list">
+        <div class="image-container">
+          <img 
+            width="200" 
+            src="{{ app.image.url }}" 
+            alt="Image"
+            />
+        </div>
+        <div class="content-box">
+          <div>
+            <div class="title">
+              {{ app.title }}
+            </div>
+            <div class="date">
+              Uploaded on {{ app.uploaded_at }}
+            </div>
+            <a class="apply" href="{% url 'Detailspage' app.id %}">View Details</a>
+          </div> 
+        </div>
+      </li>
+    {% endfor %} 
+  </ul>
+</section>
+{% endblock %}

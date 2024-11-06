@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+{% load static %} 
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/authenticatepg.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/register.css' %}" />
+{% endblock %}
+{% block content %}
+<section>
+  <div class="shadow"></div>
+  <h1>Register</h1>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="form_area">
+      <div class="label">{{ field.label_tag }}</div>
+      <div class="field">{{ field }}</div>
+      <ul class="error-wrap">
+        {% if field.errors %} 
+        {% for error in field.errors %}
+          <li class="error">{{ error }}</li>
+        {% endfor %} 
+        {% endif %}
+      </ul>
+    </div>
+    {% endfor %}
+    <input class="submit" type="submit" />
+    <div class="option">
+      <p>
+        Already have an account
+        <a class="link" href="{% url 'Loginpage' %}">Login</a>
+      </p>
+    </div>
+  </form>
+</section>
+{% endblock %}

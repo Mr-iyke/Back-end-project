@@ -1,0 +1,102 @@
+.shadow {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100vh - 60px);
+  gap: 1.5rem;
+  background-image: url(../img/hero-bg.jpg);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.form_area {
+  gap: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+form {
+  gap: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #ccc;
+  padding: 2rem 3rem;
+  border-radius: 1rem;
+  background-color: white;
+  z-index: 1;
+}
+
+h1 {
+  font-size: 3rem;
+  font-family: "poppins", sans-serif;
+  color: white;
+  z-index: 1;
+  font-weight: 800;
+}
+
+.label {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  align-items: center;
+}
+
+.field input {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 30px;
+  font-family: "Poppins", sans-serif;
+}
+
+.option {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.8rem;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: .9rem;
+  z-index: 1;
+  color: black;
+}
+
+.submit {
+  padding: 0.5rem;
+  margin-top: 0.7rem;
+  margin-inline: 3rem;
+  background-color: #3a73c2;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.submit:hover {
+  background-color: #3653b2;
+}
+
+.link {
+  text-decoration: none;
+  color: #edb021;
+  font-weight: 800;
+}
+
+
+.error-wrap {
+  width: 220px;
+}
+
+.error {
+  color: red;
+  width: fit-content;
+}

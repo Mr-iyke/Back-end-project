@@ -1,0 +1,194 @@
+* {
+  padding-left: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+}
+
+header {
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  height: 60px;
+  padding: 1rem 3rem 1rem 3rem;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1.5px solid #3a73c2;
+  position: sticky;
+  z-index: 3;
+  background-color: white;
+}
+
+nav {
+  display: flex;
+  flex-direction: inherit;
+  gap: 2rem;
+}
+
+.nav-list {
+  display: inherit;
+  flex-direction: inherit;
+  list-style-type: none;
+  text-decoration: none;
+  gap: 4.5rem;
+}
+
+.edge {
+  display: inherit;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 1rem;
+  list-style-type: none;
+  text-decoration: none;
+  align-items: center;
+}
+
+.logout {
+  /* padding-left: 2rem; */
+  padding-right: 2rem;
+}
+
+li {
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+  color: black;
+  font-weight: 400;
+  font-size: 0.9rem;
+  list-style-type: none;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-family: inherit;
+  color: inherit;
+}
+
+.nav-link:hover {
+  border-bottom: 2px solid #edb021;
+}
+
+.sign {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+}
+
+.login {
+  color: whitesmoke;
+  background-color: #edb021;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  transition: 500ms;
+}
+
+.login:hover {
+  border: 2px solid #edb021;
+  color: black;
+  background-color: white;
+}
+
+.profile {
+  width: 37px;
+  height: 35px;
+}
+
+.profile-pics {
+  border-radius: 5rem;
+  border: black solid .2px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.logo-bag {
+  width: 46px;
+  height: 40px;
+}
+
+.logo-name {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5rem;
+}
+
+.welcome {
+  color: green;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.messages {
+  position: absolute;
+  margin-top: 1rem;
+  width: 100%;
+  z-index: 3;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+
+.messages span {
+  padding: 1rem 2rem;
+  color: white;
+  border-radius: 0.8rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.85rem;
+}
+
+  .success-messages span{
+    background-color: rgba(0, 128, 0, .8);
+  }
+
+  .error-messages span{
+    background-color: red;
+  }
+
+.messages.scaler-open {
+  animation: open 700ms ease-in-out forwards;
+}
+
+.messages.scaler-close {
+  animation: close 500ms ease-in-out forwards;
+}
+
+@keyframes open {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    display: flex;
+  }
+}
+
+@keyframes close {
+  from {
+    transform: scale(1);
+
+    display: flex;
+  }
+  to {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+footer {
+  height: 35px;
+  /* color: #3a73c2; */
+  background-color: #3a73c2;
+  color: white;
+  padding: 0.55em 0 .3em 1em;
+  font-family: "Poppins", sans-serif;
+  font-weight: normal;
+  font-size: 13px;
+  bottom: 0;
+  position: static;
+  width: 100%;
+  /* border-top: 1.5px solid #3a73c2; */
+}

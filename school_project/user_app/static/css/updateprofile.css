@@ -1,0 +1,27 @@
+.profile-photo {
+  width: 170px;
+  height: 168px;
+}
+
+.profile-img {
+  border-radius: 6.5rem;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.form {
+  margin-top: 1rem;
+  gap: 0.7rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.file-input {
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+}
+
+.again {
+  width: 70%;
+}

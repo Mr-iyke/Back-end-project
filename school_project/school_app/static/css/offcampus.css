@@ -1,0 +1,8 @@
+.hero {
+  /* height: 100vh; */
+  height: calc(70vh - 60px);
+  flex-basis: unset;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}

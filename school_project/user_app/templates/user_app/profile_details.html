@@ -1,0 +1,81 @@
+{% extends "base.html" %} 
+{% block title %}User profile{% endblock %}
+{% load static %} 
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+{% endblock %}
+{% block content %}
+<section>
+  <h1>User Profile</h1>
+  <div class="contain">
+    <div class="wrapper">
+      {% if user.profile %}
+      <div class="profile-photo">
+          <img class="profile-img" src="{{ user.profile.avatar.url }}" alt="{{ user.username }}" accept=".jpg"/>
+          <a class="camera" href="{% url 'UpdateProfilepage' %}">
+            <span class="material-symbols-outlined cam">
+              photo_camera
+            </span>
+          </a>
+      </div>
+      {% endif %}
+        <div class="bg-cover">
+          <div class="overlay"></div>
+          <img class="bg" src="{% static 'img/herobg.jpg' %}" alt="background image">
+        </div>
+        <div class="content">
+          <div class="content-box">
+            
+            <ul class="details">
+              <li>
+                <div class="label">Username</div>
+                <div>@{{ user.username }}</div>
+              </li>
+              <li>
+                <div class="label">Gender</div>
+                <div class="name">
+                  <div>{{ user.profile.gender }}</div>
+                    <a class="edit link" href="{% url 'UpdateProfilepage' %}">
+                      Edit
+                      <span class="material-symbols-outlined pencil">
+                        edit
+                      </span>
+                    </a>
+                </div>
+              </li>
+              <li>
+                <div class="label">Email</div>
+                <div>{{ user.email }}</div>
+              </li>
+              <li>
+                <div class="label">First name</div>
+                <div class="name">
+                  <div>{{ user.first_name }}</div>
+                    <a class="edit link" href="{% url 'UpdateProfilepage' %}">
+                      Edit
+                      <span class="material-symbols-outlined pencil">
+                        edit
+                      </span>
+                    </a>
+                </div>
+              </li>
+              <li>
+                <div class="label">Last name</div>
+                <div class="name">
+                  <div>{{ user.last_name }}</div>
+                    <a class="edit link" href="{% url 'UpdateProfilepage' %}">
+                      Edit
+                      <span class="material-symbols-outlined pencil">
+                        edit
+                      </span>
+                    </a>
+                </div>
+              <li>
+            </ul>
+          </div>
+        </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+

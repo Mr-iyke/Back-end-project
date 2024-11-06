@@ -1,0 +1,15 @@
+.status {
+    width: fit-content;
+  }
+
+.recruited {
+    color: green;
+}
+
+.pending {
+    color: #edb021;
+}
+
+.declined {
+    color: red;
+}

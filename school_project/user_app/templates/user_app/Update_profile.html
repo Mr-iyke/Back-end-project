@@ -1,0 +1,59 @@
+{% extends "base.html" %} 
+{% block title %}Update profile{% endblock %}
+{% load static %} 
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/authenticatepg.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/register.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/updateprofile.css' %}" />
+{% endblock %}
+{% block content %}
+<section>
+  <div class="shadow"></div>
+  <h1>Update Profile</h1>
+    <form method="post" enctype="multipart/form-data" novalidate>
+      {% csrf_token %}
+      {% if user.profile %}
+        <div class="form_area profile-photo">
+          <img class="profile-img" src="{{ user.profile.avatar.url }}" alt="{{ user.username }}" accept=".jpg"/>
+        </div>
+      {% endif %}
+      <div class="form">
+        <div class="again form_area">
+          <input class="file-input" type="file" name="avatar"/>
+        </div>
+        <div class="form_area">
+          <div class="label">
+            Gender:
+          </div> 
+          <div class="field">
+            <input type="text" name="gender" value="{{ user.profile.gender }}" />
+          </div>
+        </div>
+        <div class="form_area">
+          <div class="label">
+            First name:
+          </div> 
+          <div class="field">
+            <input type="text" name="first_name" value="{{ user.first_name }}" />
+          </div>
+        </div>
+        <div class="form_area">
+          <div class="label">
+            Last name:
+          </div> 
+          <div class="field">
+            <input type="text" name="last_name" value="{{ user.last_name }}" />
+          </div>
+        </div>
+        <input class="submit" type="submit" value="Update" />
+        <div class="option">
+          <p>
+            <a class="link" href="{% url 'ProfileDetailspage' %}">Cancel</a>
+          </p>
+        </div>
+      </div>
+      
+    </form>
+</section>
+
+{% endblock %}
