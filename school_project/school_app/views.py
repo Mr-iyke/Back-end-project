@@ -1,9 +1,10 @@
-from django.shortcuts import render
-from .models import Job, Form, Recruit
-from .forms import AppForm
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Job, Form, AppInfo
+from .forms import FormModelForm
 from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
+from django.core.mail import send_mail
 from django.db.models import Q
 
 
@@ -27,33 +28,63 @@ class OffCampus(ListView):
     queryset = Job.objects.all().order_by("title")
     paginate_by = 16
     
-class ApplicationForm(CreateView):
+
+class JobApplyView(CreateView):
     model = Form
-    form_class = AppForm
+    form_class = FormModelForm
     template_name = "school_app/application_form.html"
-    context_object_name = "form"
-    success_url = reverse_lazy("Statuspage")
+
+    def dispatch(self, request, *args, **kwargs):
+        # Get the job from URL
+        self.job = get_object_or_404(Job, id=self.kwargs['job_id'])
+
+        # Check if user has already applied
+        if request.user.is_authenticated:
+            if AppInfo.objects.filter(job=self.job, form__user=request.user).exists():
+                messages.error(request, "You have already applied for this job.")
+                return redirect('Homepage')  # redirect to homepage or job list
+
+        return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
-        form.cleaned_data.get('Job')
-        messages.success(self.request, "Your application was sent successfully")
-        return super(ApplicationForm, self).form_valid(form)
+        # Save applicant
+        applicant = form.save(commit=False)
+        if self.request.user.is_authenticated:
+            applicant.user = self.request.user
+        applicant.save()
+
+        # Link applicant to job via AppInfo
+        AppInfo.objects.create(form=applicant, job=self.job)
+
+        # Send notification email to the job poster
+        send_mail(
+            subject=f"New Application for {self.job.title}",
+            message=f"{applicant.first_name} {applicant.last_name} applied for your job.\n"
+                    f"Contact them at: {applicant.email}",
+            from_email="none",
+            recipient_list=[self.job.posted_by.email],
+        )
+
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        # Redirect after successful application
+        return reverse_lazy('Homepage')
+
     
 class Status(ListView):
-    model = Recruit
+    model = AppInfo
     context_object_name = "all"
-    template_name = "school_app/status.html"
+    template_name = "school_app/applied.html"
     # paginate_by = 8
     # queryset = Recruit.objects.all().order_by("title")
     
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data()
-        context["all"] = context["all"].filter(Form__user=self.request.user)
-        return context
+    def get_queryset(self):
+        # Show only applications for the currently logged-in user
+        return AppInfo.objects.filter(form__user=self.request.user).order_by('-applied_at')
     
 class SearchStatus(ListView):
-    model = Recruit
+    model = AppInfo
     template_name = "school_app/status_search.html"
     context_object_name = "search"
     # queryset = Recruit.objects.all().order_by("title")

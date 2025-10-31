@@ -13,7 +13,6 @@ from django.views.generic import TemplateView
 
 
 # Create your views here.
-
 class Register(FormView):
     form_class = RegisterForm
     success_url = reverse_lazy("Homepage")

@@ -26,8 +26,11 @@
                 <li class="date">
                     Uploaded on {{ details.uploaded_at }}
                 </li>
+                <li class="date">
+                    Uploaded by {{ details.posted_by }}
+                </li>
             </ul> 
-            <a class="apply" href="{% url 'Formpage' %}">Apply for job</a>
+            <a class="apply" href="{% url 'ApplyFormpage' details.id %}">Apply for job</a>
         </div>
     </div>
 </section>

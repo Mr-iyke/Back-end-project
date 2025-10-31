@@ -93,7 +93,6 @@ DATABASES = {
         'PASSWORD': 'Manestofpower',
         'HOST': 'localhost',
         'PORT': '3306'
-
     }
 }
 

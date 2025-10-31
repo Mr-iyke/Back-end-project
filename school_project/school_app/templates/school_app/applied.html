@@ -1,0 +1,51 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% block title %}Status{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/homepg.css' %}" />
+<link rel="stylesheet" href="{% static 'css/offcampus.css' %}" />
+<link rel="stylesheet" href="{% static 'css/status.css' %}" />
+{% endblock %} 
+{% block content %}
+<section class="hero">
+  <div class="shadow"></div>
+  <div class="shape">
+    <div class="content-area">
+      <h1>Check Your Status</h1>
+      <div class="cta">
+        <form action="{% url 'StatusSearchpage' %}" method="get" role="search">
+          <input type="search" name="query" placeholder="search..." />
+          <button type="submit">search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec2">
+  <h2>
+    {% if all %}
+      Applications Status
+    {% else %}
+      No Job Applied
+    {% endif %}
+  </h2>
+
+  <ul class="grid">
+    {% for app in all %}
+      <li class="list">
+        <div class="image-container">
+          {% if app.job.image %}
+            <img width="200" src="{{ app.job.image.url }}" alt="{{ app.job.title }}" />
+          {% endif %}
+        </div>
+
+        <div class="content-box">
+          <div class="title">{{ app.job.title }}</div>
+          <div class="date">applied on {{ app.applied_at }}</div>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}
