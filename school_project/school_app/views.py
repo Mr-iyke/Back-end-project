@@ -41,7 +41,7 @@ class JobApplyView(CreateView):
         # Check if user has already applied
         if request.user.is_authenticated:
             if AppInfo.objects.filter(job=self.job, form__user=request.user).exists():
-                messages.error(request, "You have already applied for this job.")
+                messages.error(request, "You have already applied for this job, check your applied job.")
                 return redirect('Homepage')  # redirect to homepage or job list
 
         return super().dispatch(request, *args, **kwargs)
@@ -69,6 +69,7 @@ class JobApplyView(CreateView):
 
     def get_success_url(self):
         # Redirect after successful application
+        messages.success(self.request, "You application has been submitted successfully.")
         return reverse_lazy('Homepage')
 
     
